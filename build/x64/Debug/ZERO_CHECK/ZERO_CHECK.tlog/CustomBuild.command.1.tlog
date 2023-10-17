@@ -1,0 +1,10 @@
+^C:\USERS\MCALL\ONEDRIVE\DOKUMENTE\COPUTERVISION\BUILD\CMAKEFILES\C464D0747D728882663504D06755C557\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/mcall/OneDrive/Dokumente/CoputerVision/exercise1 -BC:/Users/mcall/OneDrive/Dokumente/CoputerVision/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/mcall/OneDrive/Dokumente/CoputerVision/build/CV_Ex.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

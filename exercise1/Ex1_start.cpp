@@ -18,6 +18,7 @@
 
 #define MaxPoints 2
 int nb_points=0;
+double LUT[512];
 
 cv::Mat MapCurveimage512;
 cv::Mat image, mapped_result_img;
@@ -61,14 +62,40 @@ void on_mouse( int event, int x, int y, int flags, void* param )
 
                   // determine polynomial coefficients of y(x):=a*(x-x0)ｳ-b*x+c 
                   // (want to cheat? see end of file)
+                  double        dx = x1 - x2;	double		  dy = y1 - y2;
+                    float x0 = (float)(x1 + x2) / 2;
+                    float a = (float)(-2.0*dy / pow(dx, 3.0));
+                    float b = (float)(-3.0 / 2.0*dy / dx);
+                    float c = (float)((y1 + y2) / 2.0 + b*x0);
 
+                  
                   // create the LUT for that polynom and 
                   // draw the polynom in the MapCurveimage (pixelwise)
 				      // your code for the polynomial and color transform (instead of the following line)
-                  line(MapCurveimage512, SrcPtInt[0], SrcPtInt[1], CV_RGB(255, 255, 255));	// remove that line example 
+                    for (int i = 0; i < 512; i++) {
+                        LUT[i] = a * pow(i - x0, 3) - b * i + c;
+                        if (LUT[i] > 511) {
+                            LUT[i] = 511;
+                        }
+                        else if (LUT[i] < 0) {
+                            LUT[i] = 0;
+                        }
+                        circle(MapCurveimage512, cv::Point(i, 511 - LUT[i]), 1, cv::Scalar(255, 255, 255), 1);
+                    }
 
                   // use the lookup table (LUT) to map the input image to the result image
                   // use the same LUT for each color channel (or fantasize) 
+
+                    // your code for the color transform (instead of the following line)
+                        for (int i = 0; i < image.rows; i++) {
+                            for (int j = 0; j < image.cols; j++) {
+                                mapped_result_img.at<cv::Vec3b>(i, j)[0] = LUT[image.at<cv::Vec3b>(i, j)[0]];
+                                mapped_result_img.at<cv::Vec3b>(i, j)[1] = LUT[image.at<cv::Vec3b>(i, j)[1]];
+                                mapped_result_img.at<cv::Vec3b>(i, j)[2] = LUT[image.at<cv::Vec3b>(i, j)[2]];
+                            }
+                        }
+
+
 
 				      // show non-linear mapping curve
                   imshow("GreyCurve", MapCurveimage512);
@@ -90,7 +117,7 @@ int main( int argc, char** argv )
 {
 	help();
     
-	char* filename = argc == 3 ? argv[1] : (char*)"images//fruits.jpg";
+	char* filename = argc == 3 ? argv[1] : (char*)"C:/Users/mcall/OneDrive/Dokumente/CoputerVision/exercise1/img/fruits.jpg";
     image = cv::imread(filename, 1);
 	mapped_result_img = image.clone();
 
