@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\mcall\OneDrive\Dokumente\CoputerVision\exercise1\Ex1_start.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\mcall\OneDrive\Dokumente\CoputerVision\exercise1\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C6EDD389-F32E-3923-AECB-A7C00904BA4A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

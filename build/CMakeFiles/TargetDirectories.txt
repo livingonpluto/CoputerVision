@@ -1,0 +1,3 @@
+C:/Users/mcall/OneDrive/Dokumente/CoputerVision/build/CMakeFiles/CV_Ex.dir
+C:/Users/mcall/OneDrive/Dokumente/CoputerVision/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/mcall/OneDrive/Dokumente/CoputerVision/build/CMakeFiles/ZERO_CHECK.dir
