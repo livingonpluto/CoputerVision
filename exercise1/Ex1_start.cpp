@@ -117,7 +117,7 @@ int main( int argc, char** argv )
 {
 	help();
     
-	char* filename = argc == 3 ? argv[1] : (char*)"C:/Users/mcall/OneDrive/Dokumente/CoputerVision/exercise1/img/fruits.jpg";
+	char* filename = argc == 3 ? argv[1] : (char*)"C:/Users/mcall/OneDrive/Dokumente/CoputerVision/exercise1/img/fruitsquad.jpg";
     image = cv::imread(filename, 1);
 	mapped_result_img = image.clone();
 
