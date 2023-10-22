@@ -44,7 +44,7 @@ void on_mouse( int event, int x, int y, int flags, void* param )
     {
         case cv::EVENT_LBUTTONDOWN:
         {
-            // ad new point to polygon
+            // add new point to polygon
             if (nb_points < MaxPoints) 
             {  
                SrcPtInt[nb_points].x=x;
@@ -63,7 +63,7 @@ void on_mouse( int event, int x, int y, int flags, void* param )
                   // determine polynomial coefficients of y(x):=a*(x-x0)ｳ-b*x+c 
                   // (want to cheat? see end of file)
                   double        dx = x1 - x2;	double		  dy = y1 - y2;
-                    float x0 = (float)(x1 + x2) / 2;
+                    float x0 = (float)(x1 + x2) / 2;  //hmmmmm ? ? ? ? ? ? ?
                     float a = (float)(-2.0*dy / pow(dx, 3.0));
                     float b = (float)(-3.0 / 2.0*dy / dx);
                     float c = (float)((y1 + y2) / 2.0 + b*x0);
@@ -89,9 +89,11 @@ void on_mouse( int event, int x, int y, int flags, void* param )
                     // your code for the color transform (instead of the following line)
                         for (int i = 0; i < image.rows; i++) {
                             for (int j = 0; j < image.cols; j++) {
-                                mapped_result_img.at<cv::Vec3b>(i, j)[0] = LUT[image.at<cv::Vec3b>(i, j)[0]];
-                                mapped_result_img.at<cv::Vec3b>(i, j)[1] = LUT[image.at<cv::Vec3b>(i, j)[1]];
-                                mapped_result_img.at<cv::Vec3b>(i, j)[2] = LUT[image.at<cv::Vec3b>(i, j)[2]];
+                                for(int k = 0; k < 3; k++){
+                                    mapped_result_img.at<cv::Vec3b>(i, j)[k] = LUT[image.at<cv::Vec3b>(i, j)[k]];
+                                }
+                                
+                                
                             }
                         }
 
@@ -117,7 +119,7 @@ int main( int argc, char** argv )
 {
 	help();
     
-	char* filename = argc == 3 ? argv[1] : (char*)"C:/Users/mcall/OneDrive/Dokumente/CoputerVision/exercise1/img/fruitsquad.jpg";
+	char* filename = argc == 3 ? argv[1] : (char*)"C:/Users/mcall/OneDrive/Dokumente/CoputerVision/exercise1/img/fruits.jpg";
     image = cv::imread(filename, 1);
 	mapped_result_img = image.clone();
 
